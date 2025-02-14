@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import { AlertCircle, CheckCircle, XCircle } from 'lucide-react';
-import { QRCodeData } from '../types/attendance.types';
+import { QRCodeData } from '../../../types/attendance.types';
 
 interface QRScannerProps {
   studentId: string;
