@@ -118,38 +118,38 @@ const QRScanner: React.FC<QRScannerProps> = ({ studentId, onScanSuccess }) => {
   }, [handleScan]);
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg">
+    <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-primary mb-2">Scan Attendance QR Code</h2>
-        <p className="text-gray-600">
+        <h2 className="text-2xl font-bold text-primary dark:text-blue-400 mb-2">Scan Attendance QR Code</h2>
+        <p className="text-gray-600 dark:text-gray-300">
           Please ensure you're in the classroom before scanning
         </p>
       </div>
 
       {!location ? (
-        <div className="flex items-center justify-center p-6 bg-yellow-50 rounded-lg">
-          <AlertCircle className="text-yellow-500 mr-2" />
-          <p className="text-yellow-700">
+        <div className="flex items-center justify-center p-6 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg">
+          <AlertCircle className="text-yellow-500 dark:text-yellow-400 mr-2" />
+          <p className="text-yellow-700 dark:text-yellow-200">
             Please enable location services to scan attendance
           </p>
         </div>
       ) : (
         <div className="space-y-4">
           <div className="overflow-hidden rounded-lg">
-            <div id="reader" className="w-full"></div>
+            <div id="reader" className="w-full dark:invert-[.85]"></div>
           </div>
 
           {scanError && (
-            <div className="flex items-center p-4 bg-red-50 rounded-lg">
-              <XCircle className="text-red-500 mr-2" />
-              <p className="text-red-700">{scanError}</p>
+            <div className="flex items-center p-4 bg-red-50 dark:bg-red-900/30 rounded-lg">
+              <XCircle className="text-red-500 dark:text-red-400 mr-2" />
+              <p className="text-red-700 dark:text-red-200">{scanError}</p>
             </div>
           )}
 
           {scanSuccess && (
-            <div className="flex items-center p-4 bg-green-50 rounded-lg">
-              <CheckCircle className="text-green-500 mr-2" />
-              <p className="text-green-700">Attendance recorded successfully!</p>
+            <div className="flex items-center p-4 bg-green-50 dark:bg-green-900/30 rounded-lg">
+              <CheckCircle className="text-green-500 dark:text-green-400 mr-2" />
+              <p className="text-green-700 dark:text-green-200">Attendance recorded successfully!</p>
             </div>
           )}
         </div>

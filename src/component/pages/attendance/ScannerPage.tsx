@@ -18,8 +18,8 @@ const ScannerPage: React.FC = () => {
     try {
       const attendanceData: Partial<AttendanceRecord> = {
         studentId: user?.id,
-        moduleId: data.moduleId,
-        sessionType: data.sessionType,
+        module: data.module,
+        type: data.type,
         location: data.location,
         timestamp: new Date(),
       };
@@ -38,21 +38,21 @@ const ScannerPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-4xl mx-auto px-4 py-8 dark:bg-gray-900">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Scan Attendance</h1>
-        <p className="mt-2 text-gray-600">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Scan Attendance</h1>
+        <p className="mt-2 text-gray-600 dark:text-gray-300">
           Scan the QR code shared by your lecturer to mark your attendance
         </p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        <Card>
+        <Card className="bg-white dark:bg-gray-800">
           <div className="p-6">
             <div className="flex items-center justify-center mb-6">
-              <QrCode size={48} className="text-primary" />
+              <QrCode size={48} className="text-primary dark:text-blue-400" />
             </div>
-            <h2 className="text-lg font-semibold text-center mb-4">
+            <h2 className="text-lg font-semibold text-center mb-4 text-gray-900 dark:text-white">
               Scan QR Code
             </h2>
             <QRScanner
@@ -64,29 +64,29 @@ const ScannerPage: React.FC = () => {
 
         <div className="space-y-6">
           {scanResult && (
-            <Card>
+            <Card className="bg-white dark:bg-gray-800">
               <div className="p-6">
                 <div className="flex items-center mb-4">
                   {scanResult.success ? (
-                    <CheckCircle className="h-8 w-8 text-green-500 mr-3" />
+                    <CheckCircle className="h-8 w-8 text-green-500 dark:text-green-400 mr-3" />
                   ) : (
-                    <AlertCircle className="h-8 w-8 text-red-500 mr-3" />
+                    <AlertCircle className="h-8 w-8 text-red-500 dark:text-red-400 mr-3" />
                   )}
                   <div>
-                    <h3 className="text-lg font-semibold">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                       {scanResult.success ? 'Success!' : 'Error'}
                     </h3>
-                    <p className="text-gray-600">{scanResult.message}</p>
+                    <p className="text-gray-600 dark:text-gray-300">{scanResult.message}</p>
                   </div>
                 </div>
               </div>
             </Card>
           )}
 
-          <Card>
+          <Card className="bg-white dark:bg-gray-800">
             <div className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Instructions</h3>
-              <ul className="space-y-3 text-gray-600">
+              <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Instructions</h3>
+              <ul className="space-y-3 text-gray-600 dark:text-gray-300">
                 <li className="flex items-start">
                   <span className="mr-2">1.</span>
                   Ensure you're in the classroom

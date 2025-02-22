@@ -33,7 +33,11 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '',
-        element: <Navigate to="lecturer" replace />
+        element: <DashboardLayout />
+      },
+      {
+        path: 'student',
+        element: <StudentDashboard />
       },
       {
         path: 'lecturer',
@@ -42,10 +46,6 @@ const routes: RouteObject[] = [
       {
         path: 'hod',
         element: <HODDashboard />
-      },
-      {
-        path: 'student',
-        element: <StudentDashboard />
       },
       {
         path: 'admin',

@@ -55,9 +55,9 @@ const QRGeneratorForm: React.FC<QRGeneratorFormProps> = ({
       lecturerName: lecturerData.name,
       department: lecturerData.department,
       school: lecturerData.school,
-      moduleId: selectedModule,
+      module: selectedModule,
       class: selectedClass,
-      sessionType,
+      type: sessionType,
       timestamp: Date.now(),
       location: {
         latitude: location.coords.latitude,
@@ -76,33 +76,35 @@ const QRGeneratorForm: React.FC<QRGeneratorFormProps> = ({
   };
 
   return (
-    <Card className="max-w-lg mx-auto">
+    <Card className="max-w-lg mx-auto bg-white dark:bg-gray-800">
       <div className="space-y-6">
         <div className="text-center">
-          <QrCode className="mx-auto h-12 w-12 text-primary" />
-          <h2 className="mt-2 text-xl font-semibold text-gray-900">
+          <QrCode className="mx-auto h-12 w-12 text-primary dark:text-blue-400" />
+          <h2 className="mt-2 text-xl font-semibold text-gray-900 dark:text-white">
             Generate Attendance QR Code
           </h2>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
             Create a QR code for students to scan and mark their attendance
           </p>
         </div>
 
         {error && (
-          <div className="bg-red-50 text-red-700 p-3 rounded-md text-sm">
+          <div className="bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-200 p-3 rounded-md text-sm">
             {error}
           </div>
         )}
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
               Select Module
             </label>
             <select
               value={selectedModule}
               onChange={(e) => setSelectedModule(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+              className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 
+                bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                shadow-sm focus:border-primary focus:ring-primary dark:focus:border-blue-400 dark:focus:ring-blue-400"
             >
               <option value="">Choose a module...</option>
               {modules.map((module) => (
@@ -114,13 +116,15 @@ const QRGeneratorForm: React.FC<QRGeneratorFormProps> = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
               Select Class
             </label>
             <select
               value={selectedClass}
               onChange={(e) => setSelectedClass(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+              className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 
+                bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                shadow-sm focus:border-primary focus:ring-primary dark:focus:border-blue-400 dark:focus:ring-blue-400"
             >
               <option value="">Choose a class...</option>
               {classes.map((cls) => (
@@ -132,7 +136,7 @@ const QRGeneratorForm: React.FC<QRGeneratorFormProps> = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
               Session Type
             </label>
             <div className="mt-1 flex space-x-4">
@@ -141,8 +145,8 @@ const QRGeneratorForm: React.FC<QRGeneratorFormProps> = ({
                 onClick={() => setSessionType('first')}
                 className={`flex-1 py-2 px-4 rounded-md ${
                   sessionType === 'first'
-                    ? 'bg-primary text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-primary dark:bg-blue-600 text-white'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 First Session
@@ -152,8 +156,8 @@ const QRGeneratorForm: React.FC<QRGeneratorFormProps> = ({
                 onClick={() => setSessionType('second')}
                 className={`flex-1 py-2 px-4 rounded-md ${
                   sessionType === 'second'
-                    ? 'bg-primary text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-primary dark:bg-blue-600 text-white'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 Second Session
@@ -162,12 +166,12 @@ const QRGeneratorForm: React.FC<QRGeneratorFormProps> = ({
           </div>
 
           {location ? (
-            <div className="flex items-center text-sm text-green-600">
+            <div className="flex items-center text-sm text-green-600 dark:text-green-400">
               <MapPin size={16} className="mr-2" />
               Location acquired
             </div>
           ) : (
-            <div className="flex items-center text-sm text-yellow-600">
+            <div className="flex items-center text-sm text-yellow-600 dark:text-yellow-400">
               <MapPin size={16} className="mr-2" />
               Acquiring location...
             </div>

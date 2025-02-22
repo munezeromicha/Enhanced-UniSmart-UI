@@ -1,34 +1,32 @@
-export interface Location {
+export interface AttendanceRecord {
+  id: string;
+  studentId: string;
+  studentName: string;
+  registrationNumber: string;
+  module: string;
+  moduleName: string;
+  type: 'first' | 'second';
+  timestamp: Date;
+  firstScan: boolean;
+  secondScan: boolean;
+  status: 'present' | 'partial' | 'absent';
+  location: {
     latitude: number;
     longitude: number;
-  }
-  
-  export interface QRCodeData {
-    lecturerId: string;
-    lecturerName: string;
-    department: string;
-    school: string;
-    class: string;
-    module: string;
-    sessionType: 'first' | 'second';
-    timestamp: number;
-    location: {
-      latitude: number;
-      longitude: number;
-    };
-  }
-  
-  export interface AttendanceRecord {
-    id?: string;
-    studentId: string;
-    moduleId: string;
-    date: Date;
-    status: 'present' | 'absent' | 'late';
-    location?: {
-      latitude: number;
-      longitude: number;
-    };
-    qrData?: QRCodeData;
-    timestamp?: number;
-  }
-  
+  };
+}
+
+export interface QRCodeData {
+  lecturerId: string;
+  lecturerName: string;
+  department: string;
+  school: string;
+  module: string;
+  class: string;
+  type: 'first' | 'second';
+  timestamp: number;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
+}

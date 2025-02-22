@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 
-const AdminDashboard = () => {
+const AdminDashboard: React.FC = () => {
   const [selectedSchool, setSelectedSchool] = useState('all');
   const [selectedDepartment, setSelectedDepartment] = useState('all');
   const [selectedTimeRange, setSelectedTimeRange] = useState('week');
@@ -70,14 +70,14 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8 lg:p-10">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-8 lg:p-10">
       {/* Header Section */}
       <div className="mb-10">
         <div className="flex items-center space-x-4 mb-4">
           <img src="/images/logo.png" alt="UR Logo" className="h-12 w-12" />
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Dashboard Overview</h1>
-            <p className="text-gray-600 mt-1">Welcome to the admin dashboard</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Dashboard Overview</h1>
+            <p className="text-gray-600 dark:text-gray-300 mt-1">Welcome to the admin dashboard</p>
           </div>
         </div>
       </div>
@@ -87,17 +87,17 @@ const AdminDashboard = () => {
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-200 p-8"
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 p-8"
           >
             <div className="flex items-center justify-between mb-6">
               <div className={`${stat.color} p-4 rounded-xl`}>
                 <stat.icon className="text-white" size={28} />
               </div>
-              <span className="text-sm font-medium text-gray-500">{stat.trend}</span>
+              <span className="text-sm font-medium text-gray-500 dark:text-gray-400">{stat.trend}</span>
             </div>
             <div>
-              <h3 className="text-gray-600 text-base font-medium mb-2">{stat.title}</h3>
-              <p className="text-4xl font-bold text-gray-900">{stat.value}</p>
+              <h3 className="text-gray-600 dark:text-gray-300 text-base font-medium mb-2">{stat.title}</h3>
+              <p className="text-4xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
             </div>
           </div>
         ))}
@@ -106,16 +106,20 @@ const AdminDashboard = () => {
       {/* Charts and Tables */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
         {/* Attendance Chart */}
-        <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-200 p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 p-8">
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center space-x-4">
-              <PieChartIcon className="text-[#00628b]" size={28} />
-              <h2 className="text-2xl font-bold text-gray-900">Overall Attendance</h2>
+              <PieChartIcon className="text-[#00628b] dark:text-blue-400" size={28} />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Overall Attendance</h2>
             </div>
             <select
               value={selectedTimeRange}
               onChange={(e) => setSelectedTimeRange(e.target.value)}
-              className="p-3 border-2 border-gray-200 rounded-xl focus:border-[#00628b] focus:ring-2 focus:ring-[#00628b]/20 transition-colors duration-200 text-base"
+              className="p-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl 
+                focus:border-[#00628b] dark:focus:border-blue-400 focus:ring-2 
+                focus:ring-[#00628b]/20 dark:focus:ring-blue-400/20 
+                transition-colors duration-200 text-base
+                bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             >
               <option value="week">This Week</option>
               <option value="month">This Month</option>
@@ -137,7 +141,12 @@ const AdminDashboard = () => {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip contentStyle={{ 
+                  backgroundColor: 'rgb(31 41 55)', 
+                  border: 'none',
+                  borderRadius: '0.5rem',
+                  color: 'rgb(243 244 246)'
+                }} />
                 <Legend verticalAlign="bottom" height={36} />
               </PieChart>
             </ResponsiveContainer>
@@ -145,13 +154,16 @@ const AdminDashboard = () => {
         </div>
 
         {/* Department Performance */}
-        <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-200 p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 p-8">
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center space-x-4">
-              <BarChart2 className="text-[#00628b]" size={28} />
-              <h2 className="text-2xl font-bold text-gray-900">Department Performance</h2>
+              <BarChart2 className="text-[#00628b] dark:text-blue-400" size={28} />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Department Performance</h2>
             </div>
-            <button className="flex items-center space-x-3 text-[#00628b] hover:text-[#00628b]/80 bg-[#00628b]/10 px-6 py-3 rounded-xl transition-colors duration-200">
+            <button className="flex items-center space-x-3 text-[#00628b] dark:text-blue-400 
+              hover:text-[#00628b]/80 dark:hover:text-blue-500 
+              bg-[#00628b]/10 dark:bg-blue-400/10 
+              px-6 py-3 rounded-xl transition-colors duration-200">
               <Download size={20} />
               <span className="font-medium">Export Report</span>
             </button>
@@ -159,44 +171,44 @@ const AdminDashboard = () => {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="px-8 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider rounded-l-lg">
+                <tr className="bg-gray-50 dark:bg-gray-700">
+                  <th className="px-8 py-4 text-left text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider rounded-l-lg">
                     Department
                   </th>
-                  <th className="px-8 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                  <th className="px-8 py-4 text-left text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                     Attendance Rate
                   </th>
-                  <th className="px-8 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                  <th className="px-8 py-4 text-left text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                     Students
                   </th>
-                  <th className="px-8 py-4 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider rounded-r-lg">
+                  <th className="px-8 py-4 text-left text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider rounded-r-lg">
                     Classes
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-600">
                 {departmentPerformance.map((dept, index) => (
-                  <tr key={index} className="hover:bg-gray-50 transition-colors duration-150">
-                    <td className="px-8 py-6 whitespace-nowrap font-medium text-gray-900">
+                  <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-150">
+                    <td className="px-8 py-6 whitespace-nowrap font-medium text-gray-900 dark:text-white">
                       {dept.department}
                     </td>
                     <td className="px-8 py-6 whitespace-nowrap">
                       <div className="flex items-center space-x-4">
-                        <span className="text-emerald-600 font-medium text-lg">
+                        <span className="text-emerald-600 dark:text-emerald-400 font-medium text-lg">
                           {dept.attendanceRate}%
                         </span>
-                        <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div className="w-32 h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-emerald-500 rounded-full transition-all duration-300"
+                            className="h-full bg-emerald-500 dark:bg-emerald-400 rounded-full transition-all duration-300"
                             style={{ width: `${dept.attendanceRate}%` }}
                           />
                         </div>
                       </div>
                     </td>
-                    <td className="px-8 py-6 whitespace-nowrap text-gray-700 text-lg">
+                    <td className="px-8 py-6 whitespace-nowrap text-gray-700 dark:text-gray-300 text-lg">
                       {dept.totalStudents.toLocaleString()}
                     </td>
-                    <td className="px-8 py-6 whitespace-nowrap text-gray-700 text-lg">
+                    <td className="px-8 py-6 whitespace-nowrap text-gray-700 dark:text-gray-300 text-lg">
                       {dept.totalClasses.toLocaleString()}
                     </td>
                   </tr>
@@ -208,17 +220,21 @@ const AdminDashboard = () => {
       </div>
 
       {/* Filters Section */}
-      <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-200 p-8">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 p-8">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-6 lg:space-y-0 mb-8">
           <div className="flex items-center space-x-4">
-            <FileText className="text-[#00628b]" size={28} />
-            <h2 className="text-2xl font-bold text-gray-900">Detailed Analytics</h2>
+            <FileText className="text-[#00628b] dark:text-blue-400" size={28} />
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Detailed Analytics</h2>
           </div>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full lg:w-auto">
             <select
               value={selectedSchool}
               onChange={(e) => setSelectedSchool(e.target.value)}
-              className="p-3 border-2 border-gray-200 rounded-xl focus:border-[#00628b] focus:ring-2 focus:ring-[#00628b]/20 transition-colors duration-200 text-base min-w-[200px]"
+              className="p-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl 
+                focus:border-[#00628b] dark:focus:border-blue-400 focus:ring-2 
+                focus:ring-[#00628b]/20 dark:focus:ring-blue-400/20 
+                transition-colors duration-200 text-base min-w-[200px]
+                bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             >
               <option value="all">All Schools</option>
               <option value="SCH1">School of Computing</option>
@@ -227,7 +243,11 @@ const AdminDashboard = () => {
             <select
               value={selectedDepartment}
               onChange={(e) => setSelectedDepartment(e.target.value)}
-              className="p-3 border-2 border-gray-200 rounded-xl focus:border-[#00628b] focus:ring-2 focus:ring-[#00628b]/20 transition-colors duration-200 text-base min-w-[200px]"
+              className="p-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl 
+                focus:border-[#00628b] dark:focus:border-blue-400 focus:ring-2 
+                focus:ring-[#00628b]/20 dark:focus:ring-blue-400/20 
+                transition-colors duration-200 text-base min-w-[200px]
+                bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             >
               <option value="all">All Departments</option>
               <option value="DEP1">Computer Science</option>
@@ -235,8 +255,8 @@ const AdminDashboard = () => {
             </select>
           </div>
         </div>
-        <div className="bg-gray-50 rounded-xl p-8">
-          <p className="text-gray-600 text-center text-lg">Select filters to view detailed analytics</p>
+        <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-8">
+          <p className="text-gray-600 dark:text-gray-300 text-center text-lg">Select filters to view detailed analytics</p>
         </div>
       </div>
     </div>

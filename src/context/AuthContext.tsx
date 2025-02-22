@@ -17,14 +17,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for stored auth token and validate
     const checkAuth = async () => {
       try {
         const token = localStorage.getItem('authToken');
-        if (token) {
-          // Validate token with backend
-          // const user = await validateToken(token);
-          // setUser(user);
+        const savedRole = localStorage.getItem('userRole');
+        if (token && savedRole) {
+          setUser({
+            id: '1',
+            name: 'John Doe',
+            email: 'john@example.com',
+            role: savedRole as UserRole
+          });
         }
       } catch (error) {
         console.error('Auth error:', error);
@@ -39,10 +42,29 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string) => {
     try {
       setLoading(true);
-      // Make API call to login
-      // const response = await loginApi(email, password);
-      // setUser(response.user);
-      // localStorage.setItem('authToken', response.token);
+      let userRole: UserRole;
+      
+      // Determine user role from email
+      if (email.includes('admin') || email.includes('dean')) {
+        userRole = 'dean';  // dean is our admin role
+      } else if (email.includes('lecturer')) {
+        userRole = 'lecturer';
+      } else if (email.includes('hod')) {
+        userRole = 'hod';
+      } else {
+        userRole = 'student';
+      }
+
+      const mockUser = {
+        id: '1',
+        name: email.includes('admin') ? 'Admin User' : 'John Doe',
+        email,
+        role: userRole
+      };
+      
+      localStorage.setItem('authToken', 'mock-token');
+      localStorage.setItem('userRole', userRole);
+      setUser(mockUser);
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -54,8 +76,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = async () => {
     try {
       setLoading(true);
-      // Make API call to logout if needed
       localStorage.removeItem('authToken');
+      localStorage.removeItem('userRole');
       setUser(null);
     } catch (error) {
       console.error('Logout error:', error);

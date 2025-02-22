@@ -2,22 +2,18 @@ import React from 'react';
 import { ChevronUp, ChevronDown, ChevronsUpDown } from 'lucide-react';
 
 interface Column<T> {
-  key: string;
-  title: string;
-  render?: (value: any, record: T) => React.ReactNode;
+  key: keyof T;
+  header: string;
   sortable?: boolean;
+  render?: (value: T[keyof T], item: T) => React.ReactNode;
 }
 
 interface TableProps<T> {
   data: T[];
-  columns: Array<{
-    key: keyof T;
-    header: string;
-    // other column properties
-  }>;
-  onSort?: (key: keyof T) => void;
-  sortColumn?: string;
+  columns: Column<T>[];
+  sortColumn?: keyof T;
   sortDirection?: 'asc' | 'desc';
+  onSort?: (column: keyof T) => void;
   loading?: boolean;
   emptyMessage?: string;
 }

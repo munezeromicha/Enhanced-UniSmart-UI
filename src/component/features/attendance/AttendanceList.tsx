@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Download, Search, Filter } from 'lucide-react';
-import { AttendanceRecord } from '../types/attendance.types';
+import { AttendanceRecord } from '../../../types/attendance.types';
 
 interface AttendanceListProps {
   moduleId: string;
@@ -11,15 +11,19 @@ const AttendanceList: React.FC<AttendanceListProps> = ({ moduleId, date }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'present' | 'partial' | 'absent'>('all');
 
-  // Mock data - replace with actual API call
+
   const attendanceRecords: AttendanceRecord[] = [
     {
       id: '1',
       studentId: 'STD001',
-      studentName: 'John Smith',
-      registrationNumber: 'REG001',
-      moduleId: 'MOD1',
-      moduleName: 'Web Programming',
+      student: {
+        name: 'John Smith',
+        registrationNumber: 'REG001'
+      },
+      module: {
+        id: 'MOD1',
+        name: 'Web Programming'
+      },
       date: new Date(),
       firstScan: true,
       secondScan: true,
